@@ -1,5 +1,3 @@
-# require "byebug"
-
 class LinkedList
     attr_reader :value, :next_node
 
@@ -9,28 +7,15 @@ class LinkedList
     end 
 end
 
-    class Stack
-        attr_reader :data
-
-        def initialize
-            @data = nil
-        end
-
-        def push(value)
-            @data = LinkedList.new(value, @data)
-        end
-    end
-
     def reverse_list(list)
-        stack = Stack.new
         while list
             stack.push(list.value)
             list = list.next_node
         end
-    # byebug
+
         return stack.data
     end
-    
+
     def print_values(list_node)
         if list_node
             print "#{list_node.value} -->"
@@ -40,12 +25,12 @@ end
             return
         end
     end
+    
+    node1 = LinkedList.new(7)
+    node2 = LinkedList.new(55, node1)
+    node3 = LinkedList.new(39, node2)
 
-    lastnode = LinkedList.new(7)
-    secondnode = LinkedList.new(55, lastnode)
-    firstnode = LinkedList.new(39, secondnode)
-
-    print_values(firstnode)
+    print_values(node3)
     puts "---------"
-    revlist = reverse_list(firstnode)
+    revlist = reverse_list(node3)
     print_values(revlist)
