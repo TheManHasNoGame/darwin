@@ -1,36 +1,42 @@
-class LinkedList
-    attr_reader :value, :next_node
+# require "byebug"
 
-    def initialize(value, next_node=nil)
-        @value = value
-        @next_node = next_node
-    end 
+class LinkedList
+  attr_accessor :value, :next_node
+
+  def initialize(value, next_node = nil)
+    @value = value
+    @next_node = next_node
+  end
 end
 
-    def reverse_list(list)
-        while list
-            stack.push(list.value)
-            list = list.next_node
-        end
+def print_values(list_node)
+  print "#{list_node.value} --> "
+  if list_node.next_node.nil?
+    print "nil\n"
+    return
+  else
+    print_values(list_node.next_node)
+  end
+end
 
-        return stack.data
-    end
+def reverse_list(list, previous = nil)
+  previous = nil
+  while list
+    current_node = list
+    next_node = current_node.next_node
+    current_node.next_node = previous
+    list = next_node
+    previous = current_node
+  end
 
-    def print_values(list_node)
-        if list_node
-            print "#{list_node.value} -->"
-            print_values(list_node.next_node)
-        else
-            puts "nil\n"
-            return
-        end
-    end
+  current_node
+end
     
-    node1 = LinkedList.new(7)
-    node2 = LinkedList.new(55, node1)
-    node3 = LinkedList.new(39, node2)
+    lastnode = LinkedList.new(7)
+    secondnode = LinkedList.new(55, lastnode)
+    firstnode = LinkedList.new(39, secondnode)
 
-    print_values(node3)
+    print_values(firstnode)
     puts "---------"
-    revlist = reverse_list(node3)
+    revlist = reverse_list(firstnode)
     print_values(revlist)
