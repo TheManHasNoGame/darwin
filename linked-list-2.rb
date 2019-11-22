@@ -9,34 +9,34 @@ class LinkedList
   end
 end
 
-def print_values(list_node)
-  print "#{list_node.value} --> "
-  if list_node.next_node.nil?
-    print "nil\n"
-    return
-  else
-    print_values(list_node.next_node)
-  end
-end
-
-def reverse_list(list, previous = nil)
-  previous = nil
-  while list
-    current_node = list
-    next_node = current_node.next_node
-    current_node.next_node = previous
-    list = next_node
-    previous = current_node
+  def print_values(list_node)
+    print "#{list_node.value} --> "
+    if list_node.next_node.nil?
+      print "nil\n"
+      return
+    else
+      print_values(list_node.next_node)
+    end
   end
 
-  current_node
-end
-    
-    lastnode = LinkedList.new(7)
-    secondnode = LinkedList.new(55, lastnode)
-    firstnode = LinkedList.new(39, secondnode)
+  def reverse_list(list, previous = nil)
+    previous = nil
+    while list
+      current_node = list
+      next_node = current_node.next_node
+      current_node.next_node = previous
+      list = next_node
+      previous = current_node
+    end
 
-    print_values(firstnode)
-    puts "---------"
-    revlist = reverse_list(firstnode)
-    print_values(revlist)
+    current_node
+  end
+
+  lastnode = LinkedList.new(7)
+  secondnode = LinkedList.new(55, lastnode)
+  firstnode = LinkedList.new(39, secondnode)
+
+  print_values(firstnode)
+  puts "---------"
+  revlist = reverse_list(firstnode)
+  print_values(revlist)
